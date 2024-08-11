@@ -3,7 +3,11 @@ CREATE DATABASE clg_mgmt;
 USE clg_mgmt;
 
 CREATE TABLE s_details (
-s_id INT NOT NULL PRIMARY KEY, s_name VARCHAR(60), dept VARCHAR(60), hostel_or_dayscholar VARCHAR(60), fees INT
+s_id INT NOT NULL PRIMARY KEY,
+s_name VARCHAR(60), 
+dept VARCHAR(60),
+hostel_or_dayscholar VARCHAR(60), 
+fees INT
 );
 
 INSERT INTO s_details (s_id, s_name, dept, hostel_or_dayscholar, fees) VALUES
@@ -11,7 +15,8 @@ INSERT INTO s_details (s_id, s_name, dept, hostel_or_dayscholar, fees) VALUES
 (2, 'harini', 'Electrical Engineering', 'Day Scholar', 1600), 
 (3, 'chitra', 'Mathematics', 'Hostel', 1400), 
 (4, 'gowthaman', 'Physics', 'Day Scholar', 1550),
-(5, 'priyanka', 'Biology', 'Hostel', 1450), (6, 'brindha', 'Chemistry', 'Day Scholar', 1500), 
+(5, 'priyanka', 'Biology', 'Hostel', 1450), 
+(6, 'brindha', 'Chemistry', 'Day Scholar', 1500), 
 (7, 'madhi', 'History', 'Hostel', 1300), 
 (8, 'sathya', 'Psychology', 'Day Scholar', 1600), 
 (9, 'purusoth', 'Engineering', 'Hostel', 1650), 
@@ -20,14 +25,18 @@ INSERT INTO s_details (s_id, s_name, dept, hostel_or_dayscholar, fees) VALUES
 (12, 'lithisha', 'Economics', 'Day Scholar', 1550),
 (13, 'sekar', 'Political Science', 'Hostel', 1500), 
 (14, 'sumadhi', 'Sociology', 'Day Scholar', 1450),
-(15, 'sandhi', 'Geology', 'Hostel', 1600), (16, 'kaviyasri', 'Statistics', 'Day Scholar', 1550), 
+(15, 'sandhi', 'Geology', 'Hostel', 1600),
+(16, 'kaviyasri', 'Statistics', 'Day Scholar', 1550), 
 (17, 'sriranjani', 'Astronomy', 'Hostel', 1700), 
 (18, 'mohana', 'Architecture', 'Day Scholar', 1650), 
 (19, 'priya', 'Art', 'Hostel', 1400), 
-(20, 'mogan', 'Music', 'Day Scholar', 1500), (21, 'prasanth', 'Theater', 'Hostel', 1450), (22, 'karthi', 'Engineering', 'Day Scholar', 1550),
+(20, 'mogan', 'Music', 'Day Scholar', 1500), 
+(21, 'prasanth', 'Theater', 'Hostel', 1450),
+(22, 'karthi', 'Engineering', 'Day Scholar', 1550),
 (23, 'pragathish', 'Mathematics', 'Hostel', 1500),
 (24, 'ramesh', 'Chemistry', 'Day Scholar', 1600), 
-(25, 'rajesh', 'Biology', 'Hostel', 1450), (26, 'selvam', 'History', 'Day Scholar', 1300),
+(25, 'rajesh', 'Biology', 'Hostel', 1450), 
+(26, 'selvam', 'History', 'Day Scholar', 1300),
 (27, 'nagamma', 'Psychology', 'Hostel', 1550), 
 (28, 'rajeshwary', 'Political Science', 'Day Scholar', 1600),
 (29, 'thilagam', 'Philosophy', 'Hostel', 1450), 
@@ -35,11 +44,16 @@ INSERT INTO s_details (s_id, s_name, dept, hostel_or_dayscholar, fees) VALUES
 
 CREATE TABLE l_details (
 
-s_id INT NOT NULL PRIMARY KEY, book_id INT NOT NULL, no_of_book_have INT NOT NULL, due_amount INT, FOREIGN KEY (s_id) REFERENCES s_details(s_id)
+s_id INT NOT NULL PRIMARY KEY,
+book_id INT NOT NULL, 
+no_of_book_have INT NOT NULL, 
+due_amount INT, 
+FOREIGN KEY (s_id) REFERENCES s_details(s_id)
 
 );
 
-INSERT INTO l_details (s_id, book_id, no_of_book_have, due_amount) VALUES
+INSERT INTO l_details 
+(s_id, book_id, no_of_book_have, due_amount) VALUES
 
 (1, 101, 3, 10),
 (2, 102, 5, 15), 
@@ -74,7 +88,11 @@ INSERT INTO l_details (s_id, book_id, no_of_book_have, due_amount) VALUES
 
 CREATE TABLE gp_details (
 
-s_id INT NOT NULL PRIMARY KEY, gp_id INT NOT NULL,intime VARCHAR(30), outtime VARCHAR(30), FOREIGN KEY (s_id) REFERENCES s_details(s_id)
+s_id INT NOT NULL PRIMARY KEY,
+gp_id INT NOT NULL,
+intime VARCHAR(30),
+outtime VARCHAR(30),
+FOREIGN KEY (s_id) REFERENCES s_details(s_id)
 
 );
 
@@ -99,12 +117,24 @@ INSERT INTO gp_details (s_id, gp_id, intime, outtime) VALUES
 (17, 217, '09:15 AM', '05:00 PM'), 
 (18, 218, '08:45 AM', '04:50 PM'), 
 (19, 219, '09:00 AM', '05:00 PM'), 
+(20, 220, '08:35 AM', '04:55 PM'), 
+(21, 221, '09:10 AM', '05:10 PM'), 
+(22, 222, '08:50 AM', '04:45 PM'),
+(23, 223, '09:00 AM', '05:05 PM'), 
+(24, 224, '08:40 AM', '05:20 PM'),
+(25, 225, '09:05 AM', '05:10 PM'), 
+(26, 226, '08:45 AM', '05:00 PM'), 
+(27, 227, '09:15 AM', '05:30 PM'), 
+(28, 228, '08:30 AM', '05:15 PM'),
 (29, 229, '09:00 AM', '05:20 PM'),
 (30, 230, '08:55 AM', '05:25 PM');
 
 CREATE TABLE dept_details (
 
-dept_id INT NOT NULL PRIMARY KEY, dept_name VARCHAR(60) NOT NULL, hod_name VARCHAR(60), contact_number VARCHAR(15)
+dept_id INT NOT NULL PRIMARY KEY,
+dept_name VARCHAR(60) NOT NULL,
+hod_name VARCHAR(60), 
+contact_number VARCHAR(15)
 
 );
 
@@ -123,7 +153,11 @@ VALUES
 
 CREATE TABLE transport_details (
 
-transport_id INT NOT NULL PRIMARY KEY, transport_type VARCHAR(60), route_no VARCHAR(20), driver_name VARCHAR(60), contact_number VARCHAR(15)
+transport_id INT NOT NULL PRIMARY KEY, 
+transport_type VARCHAR(60), 
+route_no VARCHAR(20),
+driver_name VARCHAR(60),
+contact_number VARCHAR(15)
 
 );
 
@@ -135,7 +169,11 @@ INSERT INTO transport_details (transport_id, transport_type, route_no, driver_na
 
 CREATE TABLE student_transport (
 
-s_id INT NOT NULL, transport_id INT NOT NULL, PRIMARY KEY (s_id, transport_id), FOREIGN KEY (s_id) REFERENCES s_details(s_id),FOREIGN KEY (transport_id) REFERENCES transport_details(transport_id)
+s_id INT NOT NULL,
+transport_id INT NOT NULL, 
+PRIMARY KEY (s_id, transport_id),
+FOREIGN KEY (s_id) REFERENCES s_details(s_id),
+FOREIGN KEY (transport_id) REFERENCES transport_details(transport_id)
 
 );
 
