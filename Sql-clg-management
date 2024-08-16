@@ -1,13 +1,12 @@
-
 CREATE DATABASE clg_mgmt;
 use clg_mgmt;
+
 CREATE TABLE dept_details (
 dept_id INT NOT NULL PRIMARY KEY,
 dept_name VARCHAR(60) NOT NULL,
 hod_name VARCHAR(60),
 placement_officer VARCHAR(15),
 placementofficre_no VARCHAR(15)
-
 );
 INSERT INTO dept_details (dept_id, dept_name, hod_name,placement_officer,placementofficre_no) VALUES
 (1, 'CSE', 'Dr. Anitha','pandian', '9876543210'),
@@ -18,6 +17,126 @@ INSERT INTO dept_details (dept_id, dept_name, hod_name,placement_officer,placeme
 (6, 'AIDS', 'Dr. Vidhya','sekar', '4321098765'),
 (7, 'CYBER SECURITY', 'Dr. Murugan','sankar' ,'3210987654'),
 (8, 'AGRI', 'Dr. Kamala','suguna', '2109876543');
+
+
+CREATE TABLE fees_details (
+    s_id INT NOT NULL PRIMARY KEY,
+    total_fees INT,
+    due_amount INT,
+    payment_status VARCHAR(30),
+    FOREIGN KEY (s_id) REFERENCES s_details(s_id)
+);
+INSERT INTO fees_details (s_id, total_fees, due_amount, payment_status) VALUES
+(1, 1500, 10, 'Paid'),
+(2, 1600, 15, 'Paid'),
+(3, 1400, 5, 'Pending'),
+(4, 1550, 8, 'Paid'),
+(5, 1450, 12, 'Paid'),
+(6, 1500, 7, 'Paid'),
+(7, 1300, 9, 'Pending'),
+(8, 1600, 14, 'Paid'),
+(9, 1650, 6, 'Paid'),
+(10, 1350, 11, 'Paid'),
+(11, 1400, 13, 'Paid'),
+(12, 1550, 10, 'Pending'),
+(13, 1500, 8, 'Paid'),
+(14, 1450, 12, 'Paid'),
+(15, 1600, 4, 'Paid'),
+(16, 1700, 15, 'Pending'),
+(17, 1650, 7, 'Paid'),
+(18, 1400, 11, 'Paid'),
+(19, 1500, 9, 'Pending'),
+(20, 1450, 12, 'Paid'),
+(21, 1500, 16, 'Paid'),
+(22, 1300, 7, 'Pending'),
+(23, 1550, 6, 'Paid'),
+(24, 1600, 13, 'Paid'),
+(25, 1450, 8, 'Paid'),
+(26, 1500, 10, 'Paid'),
+(27, 1300, 7, 'Pending'),
+(28, 1550, 9, 'Paid'),
+(29, 1600, 14, 'Paid'),
+(30, 1450, 10, 'Paid');
+
+
+CREATE TABLE scholarship (
+    scholarship_id INT not null auto_increment primary key,
+    s_id INT NOT NULL,
+    scholarship_name VARCHAR(100),
+    amount INT,
+    status VARCHAR(30),
+    date_awarded DATE,
+    FOREIGN KEY (s_id) REFERENCES fees_details(s_id)
+);
+INSERT INTO scholarship (s_id, scholarship_name, amount, status, date_awarded) VALUES
+(1, '7.5', 1000, 'Awarded', '2024-01-10'),
+(2, 'SC/ST', 1200, 'Awarded', '2024-02-15'),
+(3, 'Sports', 1400, 'Pending', '2024-03-01'),
+(4, '7.5', 1300, 'Awarded', '2024-01-20'),
+(5, 'SC/ST', 1500, 'Awarded', '2024-01-25'),
+(6, 'Sports', 1100, 'Awarded', '2024-02-05'),
+(7, '7.5', 1200, 'Pending', '2024-02-20'),
+(8, 'SC/ST', 1600, 'Awarded', '2024-01-30'),
+(9, 'Sports', 1650, 'Awarded', '2024-03-10'),
+(10, '7.5', 1350, 'Pending', '2024-02-25');
+
+
+CREATE TABLE hostel (
+    s_id INT NOT NULL PRIMARY KEY,
+    hostel_name VARCHAR(60),
+    room_number VARCHAR(10),
+    check_in_date DATE,
+    FOREIGN KEY (s_id) REFERENCES s_details(s_id)
+);
+INSERT INTO hostel (s_id, hostel_name, room_number, check_in_date) VALUES
+(1, 'Hostel A', 'Room 1', '2023-01-15'),
+(3, 'Hostel A', 'Room 3', '2023-01-15'),
+(4, 'Hostel A', 'Room 4', '2023-01-15'),
+(5, 'Hostel A', 'Room 5', '2023-01-15'),
+(6, 'Hostel B', 'Room 6', '2023-01-15'),
+(7, 'Hostel B', 'Room 7', '2023-01-15'),
+(15, 'Hostel C', 'Room 15', '2023-01-15'),
+(19, 'Hostel C', 'Room 19', '2023-01-15'),
+(27, 'Hostel D', 'Room 27', '2023-01-15');
+
+
+CREATE TABLE staff_details (
+    staff_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    staff_name VARCHAR(60),
+    position VARCHAR(30),
+    contact_number VARCHAR(15),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES dept_details(dept_id)
+);
+INSERT INTO staff_details (staff_name, position, contact_number, dept_id) VALUES
+('Dr. Anitha', 'HoD', '9876543210', 1),
+('Pandian', 'Placement Officer', '9876543215', 1),
+('Dr. Priya', 'Professor', '9876543211', 1),
+('Ms. Kavya', 'Lecturer', '9876543213', 1),
+('Dr. Ramesh', 'HoD', '8765432109', 2),
+('Parimala', 'Placement Officer', '8765432110', 2),
+('Dr. Karthik', 'Professor', '8765432101', 2),
+('Mr. Santhosh', 'Lecturer', '8765432103', 2),
+('Dr. Suresh', 'HoD', '7654321098', 3),
+('Snaga', 'Placement Officer', '7654321099', 3),
+('Dr. Raju', 'Professor', '7654321091', 3),
+('Ms. Nithya', 'Lecturer', '7654321093', 3),
+('Dr. Latha', 'HoD', '6543210987', 4),
+('Karthiga', 'Placement Officer', '6543210988', 4),
+('Ms. Sudha', 'Lecturer', '6543210983', 4),
+('Dr. Bala', 'HoD', '5432109876', 5),
+('Kumaran', 'Placement Officer', '5432109877', 5),
+('Dr. Lakshmi', 'Professor', '5432109871', 5),
+('Dr. Vidhya', 'HoD', '4321098765', 6),
+('Sekar', 'Placement Officer', '4321098766', 6),
+('Dr. Nirmala', 'Professor', '4321098761', 6),
+('Ms. Meena', 'Lecturer', '4321098763', 6),
+('Dr. Murugan', 'HoD', '3210987654', 7),
+('Ms. Divya', 'Lecturer', '3210987653', 7),
+('Dr. Kamala', 'HoD', '2109876543', 8),
+('Suguna', 'Placement Officer', '2109876544', 8),
+('Ms. Saranya', 'Lecturer', '2109876543', 8);
+
 
 CREATE TABLE transport_details (
 transport_id INT NOT NULL PRIMARY KEY,
@@ -37,45 +156,44 @@ CREATE TABLE s_details (
 s_id INT auto_increment primary key,
 s_name VARCHAR(60),
 dept_id int not null,
-t_fees int,
+DOB varchar(40),
 hostal_or_daysc varchar(30),
 transport_id int,
-payment_status varchar(30),
 FOREIGN KEY (dept_id) REFERENCES dept_details(dept_id),
 FOREIGN KEY (transport_id) REFERENCES transport_details(transport_id)
 );
+INSERT INTO s_details (s_name, dept_id,dob, hostal_or_daysc, transport_id) VALUES
+('Janani', 1,'2000-01-15', 'Hostel', NULL ),
+('Harini', 2,'1999-06-22', 'Day Scholar', 2),
+('Chitra', 3,'2000-09-10', 'Hostel', NULL ),
+('Gowthaman', 4,'1999-12-05','Hostel', NULL ),
+('Priyanka', 5, '2000-03-25','Hostel', NULL ),
+('Brindha', 6,'1999-11-30', 'Day Scholar', 3 ),
+('Madhi', 7, '2000-07-14','Hostel', NULL ),
+('Sathya', 8,'2000-05-16', 'Day Scholar', 1),
+('Purusoth', 1,'1999-08-20', 'Hostel', NULL),
+('Dharsan', 2, '2000-04-02','Hostel', NULL ),
+('Dharanisri', 3,'1999-10-11', 'Day Scholar', 1),
+('Lithisha', 4, '2000-12-25','Day Scholar', 2 ),
+('Sekar', 5, '1999-11-20','Hostel', NULL ),
+('Sumadhi', 6,'2000-02-15', 'Day Scholar', 2),
+('Sandhi', 7,'1999-07-07', 'Hostel', NULL ),
+('Kaviyasri', 8, '2000-08-30','Day Scholar', 3 ),
+('Sriranjani', 1, '1999-05-22','Hostel', NULL),
+('Mohana', 2, '2000-10-15', 'Hostel', NULL ),
+('Priya', 3, '1999-06-10', 'Day Scholar', 3 ),
+('Mogan', 4, '2000-03-20','Hostel', NULL ),
+('Prasanth', 5,'1999-09-08','Hostel', NULL),
+('Karthi', 6,'2000-01-01', 'Day Scholar', 1),
+('Pragathish', 7,'1999-12-10', 'Hostel', NULL ),
+('Ramesh', 8,'2000-04-25', 'Day Scholar', 3),
+('Rajesh', 1,'1999-07-12', 'Hostel', NULL ),
+('Selvam', 2,'2000-09-18', 'Day Scholar', 2 ),
+('Nagamma', 3,'1999-11-05',	 'Hostel', NULL),
+('Rajeshwary', 4,'2000-02-28', 'Day Scholar', 2 ),
+('Thilagam', 5,'1999-10-30', 'Hostel', NULL),
+('Janani', 6,'2000-12-01','Day Scholar', 3);
 
-INSERT INTO s_details (s_name, dept_id, t_fees, hostal_or_daysc, transport_id, payment_status) VALUES
-('Janani', 1, 1500, 'Hostel', NULL, 'Paid'),
-('Harini', 2, 1600, 'Day Scholar', 2, 'Paid'),
-('Chitra', 3, 1400, 'Hostel', NULL, 'Pending'),
-('Gowthaman', 4, 1550, 'Hostel', NULL, 'Paid'),
-('Priyanka', 5, 1450, 'Hostel', NULL, 'Paid'),
-('Brindha', 6, 1500, 'Day Scholar', 3, 'Paid'),
-('Madhi', 7, 1300, 'Hostel', NULL, 'Pending'),
-('Sathya', 8, 1600, 'Day Scholar', 1, 'Paid'),
-('Purusoth', 1, 1650, 'Hostel', NULL, 'Paid'),
-('Dharsan', 2, 1350, 'Hostel', NULL, 'Paid'),
-('Dharanisri', 3, 1400, 'Day Scholar', 1, 'Paid'),
-('Lithisha', 4, 1550, 'Day Scholar', 2, 'Pending'),
-('Sekar', 5, 1500, 'Hostel', NULL, 'Paid'),
-('Sumadhi', 6, 1450, 'Day Scholar', 2, 'Paid'),
-('Sandhi', 7, 1600, 'Hostel', NULL, 'Paid'),
-('Kaviyasri', 8, 1550, 'Day Scholar', 3, 'Paid'),
-('Sriranjani', 1, 1700, 'Hostel', NULL, 'Pending'),
-('Mohana', 2, 1650, 'Hostel', NULL, 'Paid'),
-('Priya', 3, 1400, 'Day Scholar', 3, 'Paid'),
-('Mogan', 4, 1500, 'Hostel', NULL, 'Pending'),
-('Prasanth', 5, 1450, 'Hostel', NULL, 'Paid'),
-('Karthi', 6, 1550, 'Day Scholar', 1, 'Paid'),
-('Pragathish', 7, 1500, 'Hostel', NULL, 'Pending'),
-('Ramesh', 8, 1600, 'Day Scholar', 3, 'Paid'),
-('Rajesh', 1, 1450, 'Hostel', NULL, 'Paid'),
-('Selvam', 2, 1300, 'Day Scholar', 2, 'Pending'),
-('Nagamma', 3, 1550, 'Hostel', NULL, 'Paid'),
-('Rajeshwary', 4, 1600, 'Day Scholar', 2, 'Paid'),
-('Thilagam', 5, 1450, 'Hostel', NULL, 'Paid'),
-('Janani', 6, 1500, 'Day Scholar', 3, 'Paid');
 
 CREATE TABLE l_details (
 s_id INT NOT NULL PRIMARY KEY,
@@ -116,6 +234,7 @@ INSERT INTO l_details (s_id, book_id, no_of_book_have, due_amount) VALUES
 (29, 129, 5, 14),
 (30, 130, 6, 10);
 
+
 CREATE TABLE gp_details (
 s_id INT NOT NULL PRIMARY KEY,
 gp_id INT NOT NULL,
@@ -154,6 +273,7 @@ INSERT INTO gp_details (s_id, gp_id, intime, outtime) VALUES
 (28, 228, '08:30 AM', '05:15 PM'),
 (29, 229, '09:00 AM', '05:20 PM'),
 (30, 230, '08:55 AM', '05:25 PM');
+
 
 CREATE TABLE placed_students (
 placement_id INT NOT NULL PRIMARY KEY,
@@ -194,9 +314,22 @@ INSERT INTO placed_students (placement_id, s_id, company_name, package) VALUES
 (29, 29, 'Ericsson', 4.2),
 (30, 30, 'Nokia', 4.1);
 
-SELECT s.s_id, s.s_name,d.dept_name,s.hostal_or_daysc,t.route, t.driver_name,
-ps.company_name, ps.package
+
+SELECT 
+    s.s_name AS Student_Name,
+    d.dept_name AS Department,
+    h.hostel_name AS Hostel,
+    f.total_fees AS Total_Fees,
+    f.due_amount AS Due_Amount,
+    f.payment_status AS Payment_Status,
+    sch.scholarship_name AS Scholarship_Name,
+    sch.amount AS Scholarship_Amount,
+    p.company_name AS Company,
+    p.package AS Package
+    
 FROM s_details s
-LEFT JOIN dept_details d ON s.dept_id = d.dept_id
-LEFT JOIN transport_details t ON s.transport_id = t.transport_id
-LEFT JOIN placed_students ps ON s.s_id = ps.s_id;
+JOIN dept_details d ON s.dept_id = d.dept_id
+LEFT JOIN hostel h ON s.s_id = h.s_id
+LEFT JOIN fees_details f ON s.s_id = f.s_id
+LEFT JOIN scholarship sch ON s.s_id = sch.s_id
+LEFT JOIN placed_students p ON s.s_id = p.s_id;
